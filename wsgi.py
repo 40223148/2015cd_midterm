@@ -108,7 +108,8 @@ class Hello(object):
     <form method=\"post\" action=\"dowork\">
         <fieldset>
         <legend>齒輪參數表單:</legend>
-        學號:40223148<br />
+        學號:<br />
+        <input type=\"text\" name=\"Z\"><br />
         齒數:<br />
         <input type=\"text\" name=\"N\"><br />
 
@@ -121,8 +122,7 @@ class Hello(object):
         <input type=\"reset\" value=\"重填\">
         <a href="gear">3D模式</a>
     </form>
-    2D齒輪示範結果圖示
-    <img src="https://copy.com/4TodbsNIDUOGnLgj"><br />
+
 
     <hr>
     <!-- 以下在網頁內嵌 Brython 程式 -->
@@ -259,7 +259,7 @@ def gear(midx, midy, rp, n, 顏色):
 
 gear(400,400,300,41,"blue")
 </script>
-<canvas id="plotarea" width="800" height="800"></canvas>
+<canvas id="plotarea" width="1600" height="1600"></canvas>
 </body>
 </html>
     '''
@@ -361,10 +361,12 @@ gear(400,400,300,41,"blue")
         return outstring
     #@+node:2014fall.20141215194146.1793: *3* doAct
     @cherrypy.expose
-    def dowork(self, K=None, N=None, inp2=None):
+    def dowork(self,Z=None, K=None, N=None, inp2=None):
         inp3=int(N)*int(K)/2
         #inp 變數即為表單值, 其格式為字串
         outString = ""
+        outString +="學號:"+Z
+        outString += "<br />"
         outString +="齒數:"+N
         outString += "<br />"
         outString +="模數:"+K
@@ -509,7 +511,6 @@ def gear(midx, midy, j, n, 顏色):
         create_line(lfx,lfy,rfx,rfy,fill=顏色)
 
 gear(400,400,'''+str(K)+''','''+str(N)+''',"blue")
-gear(700,400,'''+str(K)+''',6,"blue")
 </script>
 <canvas id="plotarea" width="800" height="800"></canvas>
 </body>
